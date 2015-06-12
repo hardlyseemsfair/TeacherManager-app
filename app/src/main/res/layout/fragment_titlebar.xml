@@ -29,6 +29,7 @@
         android:layout_weight="0.17"
         android:gravity="center|left"
         android:layout_margin="5dp"
+        android:paddingLeft="5dp"
         android:background="#ffffff" />
 
     <View

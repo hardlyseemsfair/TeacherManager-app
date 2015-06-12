@@ -39,7 +39,7 @@ public class DirectoryObserver extends FileObserver {
         // a new file or subdirectory was created under the monitored directory
         if ((FileObserver.CREATE & event) != 0) {
             // TODO Nothing... yet
-            Log.v("DIR OBSERVER", "Observer: " + workingDIR + " CREATED FILE for: " + filename);
+        //    Log.v("DIR OBSERVER", "Observer: " + workingDIR + " CREATED FILE for: " + filename);
             broadcastIntent(ApplicationReceiver.FILE_CREATED, filename);
         }
         // a file or directory was opened
@@ -55,7 +55,7 @@ public class DirectoryObserver extends FileObserver {
         // data was written to a file
         if ((FileObserver.MODIFY & event) != 0) {
             // TODO Nothing... yet
-            Log.v("DIR OBSERVER", "Observer: " + workingDIR + " SAVED NEW DATA for: " + filename);
+          //  Log.v("DIR OBSERVER", "Observer: " + workingDIR + " SAVED NEW DATA for: " + filename);
             broadcastIntent(ApplicationReceiver.FILE_UPDATED, filename);
         }
         // someone has a file or directory open read-only, and closed it
@@ -72,7 +72,7 @@ public class DirectoryObserver extends FileObserver {
         // a file was deleted from the monitored directory
         if ((FileObserver.DELETE & event) != 0) {
             // TODO Remove file from the server
-            Log.v("DIR OBSERVER", "Observer: " + workingDIR + " DELETED for: " + filename);
+           // Log.v("DIR OBSERVER", "Observer: " + workingDIR + " DELETED for: " + filename);
             broadcastIntent(ApplicationReceiver.FILE_DELETED, filename);
         }
         // the monitored file or directory was deleted, monitoring effectively
@@ -89,7 +89,7 @@ public class DirectoryObserver extends FileObserver {
         // a file or subdirectory was moved to the monitored directory
         if ((FileObserver.MOVED_TO & event) != 0) {
             // TODO Nothing... yet
-            Log.v("DIR OBSERVER", "Observer: " + workingDIR + " MOVED TO FILE for: " + filename);
+         //   Log.v("DIR OBSERVER", "Observer: " + workingDIR + " MOVED TO FILE for: " + filename);
             //broadcastIntent(ApplicationReciever.FILE_MOVED_TO, filename);
         }
         // the monitored file or directory was moved; monitoring continues

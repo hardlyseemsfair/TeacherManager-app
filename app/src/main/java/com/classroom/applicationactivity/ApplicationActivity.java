@@ -587,8 +587,9 @@ public class ApplicationActivity extends FragmentActivity implements Application
             buildViewHelpFragment();
         }else {
             fvf = FolderViewFragment.newInstance(path);
-            sessionLog.writeLog(LogFlag.USER_ACTION, "Fragment set to folder view on folder " + fvf.getWorkingDir());
             buildFolderViewFragment();
+            sessionLog.writeLog(LogFlag.USER_ACTION, "Fragment set to folder view on folder " + path);
+            tbf.setDirectoryText(Config.formatGroupNameDisplay(path));
         }
     }
 
@@ -679,7 +680,7 @@ public class ApplicationActivity extends FragmentActivity implements Application
                 }
             }
             if(destDIR.equalsIgnoreCase("Camera")) destDIR = username + "/" + destDIR;
-            if(sourceDIR.equalsIgnoreCase("Camera")) destDIR = username + "/" + destDIR;
+            if(sourceDIR.equalsIgnoreCase("Camera")) sourceDIR = username + "/" + sourceDIR;
             FileMoveCopyTask fmt = new FileMoveCopyTask(this);
             fmt.execute(filename, sourceDIR, destDIR, mask);
         }

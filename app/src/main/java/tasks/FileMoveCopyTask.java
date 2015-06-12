@@ -40,6 +40,12 @@ public class FileMoveCopyTask extends AsyncTask <String, FileMoveCopyResponse, F
         String destDir = val[2];
         String mask = val[3];
         FileMoveCopyResponse response = new FileMoveCopyResponse(mask, filename, sourceDir, destDir);
+        Log.w("MOVE COPY SERVER TASK", "Filename: " + filename
+                + "\nSourceDIR: " + sourceDir
+                + "\nDestDIR: " + destDir
+                + "\nMask: " + mask);
+
+
         JSONObject json = ServerRequestHandler.serverFileMoveCopy(filename,sourceDir,destDir,mask);
         try {
             if (json.getString(Config.KEY_SUCCESS) != null) {
