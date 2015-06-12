@@ -30,6 +30,8 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
     //Class variables
     ApplicationFragmentListener mCallback;
     private Spinner spinner;
+    TextView folder;
+    TextView user;
     private Button logoutButton, menuButton;
     private UserDBHandler userDB;
     ArrayList<String> directories;
@@ -51,7 +53,9 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
                 mCallback.onMenuClick();
             }
         });
-        setSpinnerBlock(view);
+        folder = (TextView) view.findViewById(R.id.directory);
+        user = (TextView) view.findViewById(R.id.userText);
+        //setSpinnerBlock(view);
         setLogoutButtonBlock(view);
         return view;
     }
@@ -65,6 +69,18 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
         directories.add("Camera");
     }
 
+    public void setDirectoryText(String t){
+        folder.setText(Config.formatGroupNameDisplay(t));
+    }
+
+    public void setUserText(String t){
+        user.setText("User: " + t);
+    }
+
+    public void setUserText(){
+
+    }
+
 
     /**
      * Creates the spinner contents
@@ -72,7 +88,7 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
      */
     private void setSpinnerBlock(View view){
         TextView txtUser = (TextView) view.findViewById(R.id.directoryText);
-        spinner = (Spinner) view.findViewById(R.id.directorySpinner);
+        //spinner = (Spinner) view.findViewById(R.id.directorySpinner);
         setSpinnerContents(view);
     }
 
@@ -96,9 +112,6 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
      */
     private ArrayAdapter<String> getSpinnerAdapter(ArrayList<String> directories){
         String[] adapterArray = directories.toArray(new String[directories.size()]);
-        for(int i = 0; i < adapterArray.length; i++){
-            adapterArray[i] = Config.formatGroupNameDisplay(adapterArray[i]);
-        }
         ArrayAdapter<String> spinnerList = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, adapterArray);
         spinnerList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return spinnerList;
@@ -150,7 +163,7 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
      * @param dir the directory the set the spinner to
      */
     public void setSpinnerEntry(String dir){
-        spinner.setSelection(adapter.getPosition(dir));
+//        spinner.setSelection(adapter.getPosition(dir));
     }
 
     /**

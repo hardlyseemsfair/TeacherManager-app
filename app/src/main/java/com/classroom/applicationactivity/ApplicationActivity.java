@@ -139,6 +139,7 @@ public class ApplicationActivity extends FragmentActivity implements Application
     // Bad design they should be instantiated as needed not kept around.
     private FolderViewFragment fvf;
     private ChatViewFragment cvf;
+    private TitleBarFragment tbf;
     // User directories
     private ArrayList<String> directories = new ArrayList<>(); // A list of all
     // directories
@@ -294,8 +295,10 @@ public class ApplicationActivity extends FragmentActivity implements Application
 
         // Create fragments
         FragmentManager fm = getFragmentManager();
-        TitleBarFragment tbf = (TitleBarFragment) fm.findFragmentById(R.id.titlebar_fragment);
-        tbf.updateAdapter(getDirectories());
+        tbf = (TitleBarFragment) fm.findFragmentById(R.id.titlebar_fragment);
+        tbf.setDirectoryText(username);
+        tbf.setUserText(username);
+        //tbf.updateAdapter(getDirectories());
         // Once groups are set, execute chat messages task
         GetUserChatMessagesTask task = new GetUserChatMessagesTask(this);
         task.execute(username);

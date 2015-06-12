@@ -75,7 +75,11 @@ public class LoginTask extends AsyncTask<String, Void, Integer> {
                     ServerRequestHandler.logoutUser(context);
                     db.addUser( json_user.getString(Config.KEY_USERNAME), json_user.getString(Config.KEY_CREATED_AT));
                     // Login Success
+                    String isTeacher = json_user.getString("is_teacher");
                     responseCode = 1;
+                    if(!isTeacher.equals("1")) responseCode = 2;
+
+                    
                 } else {
                     // Error in login
                     Log.i("LOGIN TASK", "LOGING FAILURE string");

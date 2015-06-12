@@ -44,10 +44,6 @@ public class LoginFragment extends Fragment {
         Button btnLogin = (Button) view.findViewById(R.id.btnLogin);
         Button btnLinkToRegister = (Button) view.findViewById(R.id.btnLinkToRegisterScreen);
         TextView loginErrorMsg = (TextView) view.findViewById(R.id.login_error);
-        final Spinner serverSpinner = (Spinner) view.findViewById(R.id.server_spinner);
-        ArrayAdapter<String> spinnerList = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, server);
-        spinnerList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        serverSpinner.setAdapter(spinnerList);
         // Login button Click Event
 //        final EditText first = (EditText) view.findViewById(R.id.first);
 //        first.setVisibility(View.GONE);

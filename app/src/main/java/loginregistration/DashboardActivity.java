@@ -1,19 +1,18 @@
 package loginregistration;
 
-import android.os.Bundle;
-
-import com.classroom.applicationactivity.ApplicationActivity;
-import com.classroom.applicationactivity.R;
-
-import handlers.UserDBHandler;
-import handlers.ServerRequestHandler;
-import util.ToastMessages;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Button;
+
+import com.classroom.applicationactivity.ApplicationActivity;
+import com.classroom.applicationactivity.R;
+
+import handlers.ServerRequestHandler;
+import handlers.UserDBHandler;
+import util.ToastMessages;
 
 public class DashboardActivity extends FragmentActivity implements OnLoginRegisterInterface {
     Button btnLogout;
@@ -70,6 +69,9 @@ public class DashboardActivity extends FragmentActivity implements OnLoginRegist
         if (response == 0) {
             Log.i("LOGIN FRAGMENT", "Executing failed login");
             ToastMessages.longToast("Error logging in, please try again.", 30, this);
+        } else if (response == 2) {
+            Log.i("LOGIN FRAGMENT", "User is student, not authorized for teacher app");
+            ToastMessages.longToast("Not authorised to use the teacher application, please use the student version", 30, this);
         } else {
             startApplication();
         }
