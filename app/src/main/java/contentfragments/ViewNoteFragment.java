@@ -49,12 +49,14 @@ public class ViewNoteFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Note n = noteManager.get(i);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("note", n);
-                ViewNoteDialog dialog = new ViewNoteDialog();
-                dialog.setArguments(bundle);
-                dialog.show(getActivity().getSupportFragmentManager(), "viewNoteDialog");
+                if (i != 0) {
+                    Note n = noteManager.get(i);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("note", n);
+                    ViewNoteDialog dialog = new ViewNoteDialog();
+                    dialog.setArguments(bundle);
+                    dialog.show(getActivity().getSupportFragmentManager(), "viewNoteDialog");
+                }
             }
         });
         return view;

@@ -1,6 +1,7 @@
 package contentfragments;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,8 @@ public class ViewNoteAdapter extends ArrayAdapter<Note> {
             holder = new ViewHolder();
             holder.category = (TextView) convertView.findViewById(R.id.category);
             holder.title = (TextView) convertView.findViewById(R.id.title);
-            holder.note = (TextView) convertView.findViewById(R.id.note);
-            holder.metric = (TextView) convertView.findViewById(R.id.metric);
+           // holder.note = (TextView) convertView.findViewById(R.id.note);
+           // holder.metric = (TextView) convertView.findViewById(R.id.metric);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -56,13 +57,15 @@ public class ViewNoteAdapter extends ArrayAdapter<Note> {
 
         String shortnote = workingnote.getMessage();
         if(shortnote.length() > MAX_NOTE_LENGTH) shortnote = shortnote.substring(0, MAX_NOTE_LENGTH) + "...";
-        holder.note.setText(shortnote);
+//        holder.note.setText(shortnote);
         if(position == 0){
-            holder.metric.setText("#");
+            holder.category.setGravity(Gravity.CENTER);
+            holder.title.setGravity(Gravity.CENTER);
+//            holder.metric.setText("#");
         } else if (workingnote.getRating() == -1){
-            holder.metric.setText("-");
+//            holder.metric.setText("-");
         } else {
-            holder.metric.setText(workingnote.getRatingString());
+//            holder.metric.setText(workingnote.getRatingString());
         }
         return convertView;
     }

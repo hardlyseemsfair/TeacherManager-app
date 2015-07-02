@@ -74,7 +74,7 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
     }
 
     public void setUserText(String t){
-        user.setText("User: " + t);
+        user.setText(t);
     }
 
     public void setUserText(){
@@ -142,11 +142,11 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
      */
     public void updateAdapter(ArrayList<String> dirs){
 
-        if(dirs.size() != spinner.getAdapter().getCount()){
-            directories = dirs;
-            Log.v("TITLE BAR FRAGMENT","UPDATING SPINNER" + dirs.toString());
-            setSpinnerContents(view);
-        }
+//        if(dirs.size() != spinner.getAdapter().getCount()){
+//            directories = dirs;
+//            Log.v("TITLE BAR FRAGMENT","UPDATING SPINNER" + dirs.toString());
+//            setSpinnerContents(view);
+//        }
     }
 
     /**

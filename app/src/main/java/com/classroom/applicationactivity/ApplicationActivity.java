@@ -1228,10 +1228,10 @@ public class ApplicationActivity extends FragmentActivity implements Application
             openedFile = null;
         } else {
             Log.i("ON RESUME", "No file changed");
-            if (!isMyServiceRunning(FullFileSyncService.class)) {
-                startFileSyncService();
-                Log.e("ON RESUME", "Starting file monitor sync");
-            }
+//            if (!isMyServiceRunning(FullFileSyncService.class)) {
+//                startFileSyncService();
+//                Log.e("ON RESUME", "Starting file monitor sync");
+//            }
         }
 
     }
@@ -1312,6 +1312,7 @@ public class ApplicationActivity extends FragmentActivity implements Application
                 }
             }
             menuSelect.closeDrawer(menuItemsList);
+            menuItemsList.setItemChecked(position, false);
         }
     }
 

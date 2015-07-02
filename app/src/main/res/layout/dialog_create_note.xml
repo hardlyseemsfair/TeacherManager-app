@@ -27,7 +27,7 @@
             android:layout_height="43dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
-            android:background="#ffffff" />
+            android:background="@android:drawable/spinner_dropdown_background" />
 
     </LinearLayout>
 

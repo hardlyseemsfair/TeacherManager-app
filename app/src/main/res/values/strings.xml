@@ -6,7 +6,7 @@
     <string name="menu">Menu</string>
     <string name="logout">Logout</string>
     <string name="username">User: </string>
-    <string name="files">Files: </string>
+    <string name="files">viewing folder: </string>
     <string name="noteshot">Note shot </string>
 
 
