@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:orientation="vertical">
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:background="#ffe0e0e0">
 
     <!--  Title bar -->
     <TextView
@@ -15,11 +16,13 @@
         android:layout_margin="15dp"
         android:textAlignment="center" />
 
+
     <!-- Select group name bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -38,6 +41,10 @@
             android:background="#fffdfdfd" />
     </LinearLayout>
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
     <!-- List view wrapper -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,7 +68,8 @@
             <ListView
                 android:id="@+id/student_list"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="fill_parent"
+                android:background="#ffffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -79,9 +87,16 @@
             <ListView
                 android:id="@+id/group_list"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="fill_parent"
+                android:background="#ffffffff" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,15 +110,19 @@
             android:id="@+id/create_group_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
             android:text="Create Group"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:background="#ffffffff" />
 
         <Button
             android:id="@+id/cancel_create_group_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:text="Cancel"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:background="#ffffffff" />
     </LinearLayout>
 
 </LinearLayout>

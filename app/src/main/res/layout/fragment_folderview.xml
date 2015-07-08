@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffffff">
+
+    <TextView
+        android:id="@+id/foldertext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="0"
+        android:text="FOLDER HERE"/>
+
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/grid_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_weight="1"
     android:numColumns="auto_fit"
     android:columnWidth="90dp"
     android:horizontalSpacing="10dp"
     android:verticalSpacing="10dp"
     android:gravity="center"
-    android:layout_margin="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:stretchMode="columnWidth"
     android:background="#ffffffff">
 </GridView>
+
+</LinearLayout>

@@ -33,8 +33,8 @@ public class Config {
 //    public static final String CONNECT_IP = "http://192.168.1.209:80/php_files/";
 //    public static final String CONECT_DIR = "http://192.168.1.209:80/directorys/";
 
-    public static final String CONNECT_IP = "http://10.30.18.113:80/php_files/";
-    public static final String CONECT_DIR = "http://10.30.18.113:80/directorys/";
+    public static final String CONNECT_IP = "http://10.30.18.214:80/php_files/";
+    public static final String CONECT_DIR = "http://10.30.18.214:80/directorys/";
 
 
 
