@@ -64,7 +64,7 @@ public class ApplicationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
         result = intent.getExtras().getString("result");
-
+        Log.v("APPRECIEVER","Intent trigger processing on receive");
         if (result != null) {
             //FileObserver actions
             if (result.equalsIgnoreCase(FILE_CREATED) || result.equalsIgnoreCase(FILE_UPDATED)
@@ -106,9 +106,11 @@ public class ApplicationReceiver extends BroadcastReceiver {
      */
     private void processGcmMessage(Intent intent) {
         JSONObject jobj;
+
         try {
             String message = intent.getExtras().getString("message");
             jobj = new JSONObject(message);
+            Log.v("GCM STRING", jobj.toString());
             /*
             Chat message added to member group, update messages
              */
@@ -175,6 +177,7 @@ public class ApplicationReceiver extends BroadcastReceiver {
                     HelpMessage helpMessage = new HelpMessage(jobj.getInt("id"), jobj.getString("student_name"),
                             jobj.getString("filename"), jobj.getInt("rating"), jobj.getString("helpmessage"), jobj.getInt("viewed"));
                     ToastMessages.longToast("PUSH NOTIFICATION - NEW HELP MESSAGE: " + helpMessage, 20, context);
+                    mCallback.updateHelpMessage(helpMessage);
 
 
             /*

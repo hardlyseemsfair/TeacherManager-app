@@ -52,8 +52,8 @@ public class ViewHelpAdapter extends ArrayAdapter<HelpMessage> {
             holder = new ViewHolder();
             holder.student = (TextView) convertView.findViewById(R.id.student_name);
             holder.filename = (TextView) convertView.findViewById(R.id.filename);
-            holder.rating = (TextView) convertView.findViewById(R.id.rating);
-            holder.message = (TextView) convertView.findViewById(R.id.message);
+//            holder.rating = (TextView) convertView.findViewById(R.id.rating);
+//            holder.message = (TextView) convertView.findViewById(R.id.message);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -61,14 +61,14 @@ public class ViewHelpAdapter extends ArrayAdapter<HelpMessage> {
         HelpMessage helpMessage = manager.get(position);
         holder.student.setText(helpMessage.getStudent_name());
         holder.filename.setText(helpMessage.getFilename());
-        holder.rating.setText(helpMessage.getRatingAsString());
-        String shortnote = helpMessage.getMessage();
-        if (shortnote.length() > MAX_NOTE_LENGTH) {
-            shortnote = shortnote.substring(0, MAX_NOTE_LENGTH) + "...";
-        } else if (shortnote.isEmpty()) {
-            shortnote = " -- ";
-        }
-        holder.message.setText(shortnote);
+        //holder.rating.setText(helpMessage.getRatingAsString());
+        //String shortnote = helpMessage.getMessage();
+//        if (shortnote.length() > MAX_NOTE_LENGTH) {
+//            shortnote = shortnote.substring(0, MAX_NOTE_LENGTH) + "...";
+//        } else if (shortnote.isEmpty()) {
+//            shortnote = " -- ";
+//        }
+//        holder.message.setText(shortnote);
 //        if(helpMessage.getViewed() == 1){
 //            listView.getChildAt(position).setBackgroundColor(Color.GREEN);
 //        }

@@ -4,6 +4,7 @@ import com.classroom.applicationactivity.ApplicationActivityAccessorInterface;
 
 import java.util.ArrayList;
 
+import helper.HelpMessage;
 import helper.Message;
 
 /**
@@ -19,6 +20,7 @@ public interface ApplicationReceiverInterface extends ApplicationActivityAccesso
 
     public void updateGroupDirectory(String dir);
 
+    public void updateHelpMessage(HelpMessage hm);
 
 
 

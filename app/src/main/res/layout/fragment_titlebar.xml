@@ -27,7 +27,7 @@
         android:textColor="#ffffff"
         android:gravity="center|right"
         android:text="@string/username" />
-
+<!--
     <TextView
         android:id="@+id/directoryText"
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:textSize="16dp"
         android:textColor="#ffffff"
         android:text="@string/files" />
-
+-->
     <TextView
         android:id="@+id/directory"
         android:layout_width="wrap_content"

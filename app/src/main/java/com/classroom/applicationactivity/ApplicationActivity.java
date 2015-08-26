@@ -964,6 +964,14 @@ public class ApplicationActivity extends FragmentActivity implements Application
         updateViewNoteFragment();
     }
 
+    @Override
+    public void updateHelpMessage(HelpMessage hm){
+        Log.v("APPLICATION ACTIVITY", "Added helpMesage " + hm);
+        helpMessageManager.add(hm);
+        updateHelpFragment();
+    }
+
+    @Override
     public void removeHelpMessage(HelpMessage hm){
         helpMessageManager.remove(hm);
         RemoveHelpTask rht = new RemoveHelpTask();

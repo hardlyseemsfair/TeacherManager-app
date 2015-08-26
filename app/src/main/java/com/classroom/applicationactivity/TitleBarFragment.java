@@ -70,11 +70,13 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
     }
 
     public void setDirectoryText(String t){
-        folder.setText(Config.formatGroupNameDisplay(t));
+
+        //folder.setText(Config.formatGroupNameDisplay(t));
     }
 
     public void setUserText(String t){
-        user.setText(t);
+        user.setText("Hi " + t);
+        //user.setText(t);
     }
 
     public void setUserText(){
@@ -87,7 +89,7 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
      * @param view associated view
      */
     private void setSpinnerBlock(View view){
-        TextView txtUser = (TextView) view.findViewById(R.id.directoryText);
+        //TextView txtUser = (TextView) view.findViewById(R.id.directoryText);
         //spinner = (Spinner) view.findViewById(R.id.directorySpinner);
         setSpinnerContents(view);
     }

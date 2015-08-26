@@ -274,9 +274,9 @@ public class FileHandler {
 
     private static String getDownloadURL(Context context, String workingDIR, String filename){
         if (workingDIR.equalsIgnoreCase("camera")) {
-            return  Config.CONECT_DIR + Config.getCurrentUsername(context) + File.separator + "Camera" + File.separator + filename;
+            return  Config.CONNECT_DIR + Config.getCurrentUsername(context) + File.separator + "Camera" + File.separator + filename;
         } else {
-            return  Config.CONECT_DIR + workingDIR + File.separator + filename;
+            return  Config.CONNECT_DIR + workingDIR + File.separator + filename;
         }
     }
 
