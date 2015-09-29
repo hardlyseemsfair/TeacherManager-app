@@ -5,9 +5,9 @@
 
     <TextView
         android:id="@+id/chat_author"
-        android:layout_width="50dp"
+        android:layout_width="130dp"
         android:layout_height="fill_parent"
-        android:gravity="center|left"
+        android:gravity="top|left"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="author"
@@ -24,6 +24,7 @@
         android:layout_toRightOf="@+id/chat_author"
         android:gravity="top|left"
         android:text="Sent"
+        android:layout_marginLeft="15dp"
         android:textSize="16sp" />
 
 </RelativeLayout> 

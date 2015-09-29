@@ -78,8 +78,10 @@ public class MoveCopyDestinationDialog extends DialogFragment {
         boolean fileExists = FileHandler.fileExistsInDirectory(destination_directory, filename);
         if (!fileExists) {
             if (flag.equalsIgnoreCase(COPY_FILE)) {
+                ToastMessages.shortToast("File copied..", 16,  (Activity)mCallback);
                 mCallback.fileMoveCopy(filename, workingDIR, dirs.get(pos), Config.FILE_COPY);
             } else if (flag.equalsIgnoreCase(MOVE_FILE)) {
+                ToastMessages.shortToast("File moved..", 16,  (Activity)mCallback);
                 mCallback.fileMoveCopy(filename, workingDIR, dirs.get(pos), Config.FILE_MOVE);
             }
         } else {

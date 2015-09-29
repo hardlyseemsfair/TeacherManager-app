@@ -11,6 +11,7 @@ import com.classroom.applicationactivity.R;
 
 import util.Config;
 import util.SessionLog;
+import util.ToastMessages;
 
 /**
  * Created by NAPOLEON on 5/17/2015.
@@ -47,6 +48,7 @@ public class SendToDialog extends DialogFragment {
     }
 
     private void onSelect(int i){
+
         if(options[i].equals(Config.STUDENT)){
             mCallback.sendFileToTarget(workingDIR, filename, Config.STUDENT);
         } else if (options[i].equals(Config.GROUP)){
