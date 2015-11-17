@@ -1,11 +1,13 @@
 package contentfragments;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.classroom.applicationactivity.R;
@@ -59,9 +61,12 @@ public class ViewNoteAdapter extends ArrayAdapter<Note> {
         if(shortnote.length() > MAX_NOTE_LENGTH) shortnote = shortnote.substring(0, MAX_NOTE_LENGTH) + "...";
 //        holder.note.setText(shortnote);
         if(position == 0){
-            holder.category.setGravity(Gravity.CENTER);
-            holder.title.setGravity(Gravity.CENTER);
-//            holder.metric.setText("#");
+            holder.category.setText("Touch to open");
+            holder.title.setText("");
+//        } else if(position == 1){
+//            holder.category.setGravity(Gravity.CENTER);
+//            holder.title.setGravity(Gravity.CENTER);
+////            holder.metric.setText("#");
         } else if (workingnote.getRating() == -1){
 //            holder.metric.setText("-");
         } else {

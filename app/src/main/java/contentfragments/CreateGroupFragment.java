@@ -78,13 +78,14 @@ public class CreateGroupFragment extends Fragment {
         studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                addStudentToGroup(students.get(i));
+                //addStudentToGroup(students.get(i));
+                moveStudentToList(i, students, groupMembers);
             }
         });
         proposedGroup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               removeStudentFromGroup(i);
+                moveStudentToList(i, groupMembers, students);
             }
         });
 
@@ -98,7 +99,7 @@ public class CreateGroupFragment extends Fragment {
                 } else if (groupName.getText().toString().isEmpty() || groupName.getText().toString().equalsIgnoreCase("")){
                     ToastMessages.shortToast("You must provide a group name.", 16, getActivity());
                 } else {
-                    String name = Config.formatGroupNameDisplay(groupName.getText().toString());
+                    String name = Config.removeGroupNameSpace(groupName.getText().toString());
                     mCallback.createNewStudentGroup(groupMembers, name);
                     groupName.clearFocus();
                     getActivity().onBackPressed();
@@ -123,15 +124,28 @@ public class CreateGroupFragment extends Fragment {
         return new CreateGroupAdapter(getActivity(), R.layout.adapter_create_group, st);
     }
 
-    private void addStudentToGroup(Student s){
-        if(!groupMembers.contains(s)) groupMembers.add(s);
-        proposedGroup.setAdapter(getAdapter(groupMembers));
+
+
+    private void moveStudentToList(int index, List<Student> fromGroup, List<Student> toGroup){
+        Student s = removeStudentFromGroup(index, fromGroup);
+        addStudentToGroup(s, toGroup);
+        updateLIstAdapters();
+
     }
 
-    private void removeStudentFromGroup(int position){
-        Student s = groupMembers.get(position);
-        Log.v("CREATE GROUP FRAG", "Attempting to remove " + s + " from collection " + groupMembers + " at index " + position);
-        groupMembers.remove(s);
+    private Student removeStudentFromGroup(int position, List<Student> fromGroup){
+        Student s = fromGroup.get(position);
+        Log.v("CREATE GROUP FRAG", "Attempting to remove " + s + " from collection " + fromGroup + " at index " + position);
+        fromGroup.remove(s);
+        return s;
+    }
+
+    private void addStudentToGroup(Student s, List<Student> toGroup){
+        if(!toGroup.contains(s)) toGroup.add(s);
+    }
+
+    private void updateLIstAdapters(){
+        studentList.setAdapter(getAdapter(students));
         proposedGroup.setAdapter(getAdapter(groupMembers));
     }
 

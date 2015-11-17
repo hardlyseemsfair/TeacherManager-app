@@ -69,6 +69,7 @@ public class GetHelpMessagesTask extends AsyncTask<Void, HelpMessageManager, Hel
 
     private HelpMessageManager buildHelpMessageManager(JSONObject json) {
         HelpMessageManager hmm = new HelpMessageManager();
+        hmm.add(new HelpMessage(-1,"Touch to open", "",-1,"",-1));
         try {
             JSONArray helparray = json.getJSONArray("help_messages");
             if (helparray != null) {

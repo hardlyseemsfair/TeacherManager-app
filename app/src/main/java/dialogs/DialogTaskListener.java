@@ -59,6 +59,7 @@ public interface DialogTaskListener extends ApplicationActivityAccessorInterface
 
     public void updateHelpFragment();
 
+    public void handleCameraDir(String destination);
 
     //Send to dialog
     public void sendFileToSet(String sourcedir, String filename, String set);

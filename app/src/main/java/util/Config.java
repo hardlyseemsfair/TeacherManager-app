@@ -33,8 +33,8 @@ public class Config {
 //    public static final String CONNECT_IP = "http://192.168.1.209:80/php_files/";
 //    public static final String CONNECT_DIR = "http://192.168.1.209:80/directorys/";
 
-    public static final String CONNECT_IP = "http://10.30.18.193:80/php_files/";
-    public static final String CONNECT_DIR = "http://10.30.18.193:80/directorys/";
+    public static final String CONNECT_IP = "http://10.30.18.209:80/php_files/";
+    public static final String CONNECT_DIR = "http://10.30.18.209:80/directorys/";
 //
 
 
@@ -147,6 +147,10 @@ public class Config {
 
     public static String formatGroupNameDisplay(String s){
         return s.replaceAll("_", " ");
+    }
+
+    public static String removeGroupNameSpace(String s){
+        return s.replaceAll(" ", "_");
     }
 
 

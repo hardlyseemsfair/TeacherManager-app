@@ -47,7 +47,7 @@ public class NavDrawerItem implements NavDrawerObject {
             icon.setImageResource(R.drawable.view_groups);
         }else if (label.equalsIgnoreCase("Create Group")){
             icon.setImageResource(R.drawable.create_group);
-        } else if (label.equalsIgnoreCase("View Help")){
+        } else if (label.equalsIgnoreCase("Help Requests")){
             icon.setImageResource(R.drawable.view_help);
         } else if (label.equalsIgnoreCase("View Notes")){
             icon.setImageResource(R.drawable.view_notes);

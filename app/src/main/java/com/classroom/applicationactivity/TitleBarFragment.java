@@ -2,11 +2,13 @@ package com.classroom.applicationactivity;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -50,6 +52,7 @@ public class TitleBarFragment extends Fragment implements OnItemSelectedListener
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mCallback.hide_keyboard((Activity) mCallback);
                 mCallback.onMenuClick();
             }
         });

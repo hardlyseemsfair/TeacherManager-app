@@ -1,5 +1,6 @@
 package com.classroom.applicationactivity;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.DownloadManager;
@@ -18,9 +19,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -42,6 +45,7 @@ import contentfragments.CreateGroupFragment;
 import contentfragments.FolderViewFragment;
 import contentfragments.ViewHelpFragment;
 import contentfragments.ViewNoteFragment;
+import dialogs.CameraDirPickDialog;
 import dialogs.CreateNoteDialog;
 import dialogs.DialogTaskListener;
 import dialogs.FileSelectedDialog;
@@ -102,7 +106,8 @@ import util.ToastMessages;
  * @author JACK
  */
 
-public class ApplicationActivity extends FragmentActivity implements ApplicationFragmentListener, DialogTaskListener, OnTaskCompleteListener, ApplicationReceiverInterface {
+public class ApplicationActivity extends FragmentActivity implements ApplicationFragmentListener, DialogTaskListener, OnTaskCompleteListener, ApplicationReceiverInterface
+                                                                        , DrawerLayout.DrawerListener{
 
     public static String CONNECT_ID;
     public static String CONNECT_DIR;
@@ -188,6 +193,8 @@ public class ApplicationActivity extends FragmentActivity implements Application
         noteManager.add(titles);
         //Build default menuSelect
         menuSelect = (DrawerLayout) findViewById(R.id.drawer_layout);
+        menuSelect.setDrawerListener(this);
+
         menuItemsList = (ListView) findViewById(R.id.drawer);
         menuItems = new ArrayList<>();
         menuItems.add(new NavDrawerHeader("Folders"));
@@ -195,8 +202,6 @@ public class ApplicationActivity extends FragmentActivity implements Application
         if (menuItemsList != null) {
             menuItemsList.setAdapter(drawerAdapter);
         }
-
-
         loadSpinner = (ProgressBar) findViewById(R.id.loadSpinner);
         loadSpinner.setVisibility(View.VISIBLE);
         setUser();
@@ -210,6 +215,22 @@ public class ApplicationActivity extends FragmentActivity implements Application
         setDefaultFragment(username);
 
     }
+
+    @Override
+    public void onDrawerClosed(View v){}
+
+    @Override
+    public void onDrawerOpened(View v){
+        hide_keyboard(this);
+    }
+
+    @Override
+    public void onDrawerStateChanged(int i){}
+
+    @Override
+    public void onDrawerSlide(View v, float f){}
+
+
 
     /**
      * Setup related methods
@@ -320,8 +341,8 @@ public class ApplicationActivity extends FragmentActivity implements Application
         menuItems = new ArrayList<>();
         //Folders
         menuItems.add(new NavDrawerHeader("My Folders"));
-        menuItems.add(new NavDrawerItem(username));
-        menuItems.add(new NavDrawerItem("Camera"));
+        menuItems.add(new NavDrawerItem("My Files..."));
+        //menuItems.add(new NavDrawerItem("Camera"));
         if(hasUserGroups()) {
             menuItems.add(new NavDrawerHeader("Group Folders"));
             for (String s : usergroups) {
@@ -335,11 +356,12 @@ public class ApplicationActivity extends FragmentActivity implements Application
         menuItems.add(new NavDrawerItem("Group Chat"));
         //Tools
         menuItems.add(new NavDrawerHeader("Tools"));
-        menuItems.add(new NavDrawerItem("Camera Shot"));
+        menuItems.add(new NavDrawerItem("Help Requests"));
         menuItems.add(new NavDrawerItem("New File..."));
         menuItems.add(new NavDrawerItem("View Notes"));
         menuItems.add(new NavDrawerItem("Make Note"));
-        menuItems.add(new NavDrawerItem("View Help"));
+        menuItems.add(new NavDrawerItem("Camera Shot"));
+
 
 
         drawerAdapter = new NavDrawerAdapter(this, R.layout.drawer_list_item, menuItems);
@@ -840,11 +862,31 @@ public class ApplicationActivity extends FragmentActivity implements Application
                 // Video capture failed, advise user
             }
         }
-        if(camerafile != null){
+        if(camerafile != null && resultCode == 0){
+            Log.v("CAMERA SHIT", "Req code:" + requestCode + " | Res code: " + resultCode);
             Log.i("CAMERA SHIT", camerafile.getPath());
-            File f = new File(camerafile.getPath());
-            updateServerFile(f.getName(),"camera");
-            camerafile = null;
+//            File f = new File(camerafile.getPath());
+//            updateServerFile(f.getName(),"camera");
+            CameraDirPickDialog cdr = new CameraDirPickDialog();
+            cdr.show(getFragmentManager(), "camera");
+        }
+    }
+
+    public void handleCameraDir(String destination){
+        if(camerafile  != null) {
+            File sourceFile = new File(camerafile.getPath());
+            if(sourceFile.length() > 0) {
+                File destFile = new File(Config.getWorkingDirectory(destination, this), sourceFile.getName() );
+                FileHandler.moveFile(sourceFile,destFile);
+                Log.v("CAMERA SEND", "Camera pic from " + sourceFile.getPath() + " size: " + sourceFile.length() + " to " + destFile.getPath() + "\n size: " + destFile.length() + " and NOT NULL");
+                updateServerFile(destFile.getName(), destination);
+                ToastMessages.shortToast("Picture sent to : " + destination, 20, this);
+                camerafile = null;
+            } else {
+                Log.v("CAMERA SEND", "Camera file size 0");
+            }
+        } else {
+            ToastMessages.shortToast("Error in file move, camerafile null", 20, this);
         }
         updateFolderViewContents();
 
@@ -949,6 +991,7 @@ public class ApplicationActivity extends FragmentActivity implements Application
 
     @Override
     public void addNote(Note n){
+        ToastMessages.shortToast("Note added..", 20, this);
         noteManager.add(n);
     }
 
@@ -1186,6 +1229,21 @@ public class ApplicationActivity extends FragmentActivity implements Application
         return true;
     }
 
+    /**
+     * Force hides the soft keyboard
+     * @param activity
+     */
+    public void hide_keyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if(view == null) {
+            view = new View(activity);
+        }
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 
     /**
      * Checks if a service is running
@@ -1274,6 +1332,10 @@ public class ApplicationActivity extends FragmentActivity implements Application
 
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
+            InputMethodManager inputManager = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
             setAction(position);
         }
 
@@ -1301,7 +1363,7 @@ public class ApplicationActivity extends FragmentActivity implements Application
             } else if (sel.equalsIgnoreCase("Create Group")) {
                 Log.v("FOLDER ACTION", "Create group fragment");
                 setContentFragment("CREATE_GROUP_FRAGMENT");
-            } else if (sel.equalsIgnoreCase("View Help")) {
+            } else if (sel.equalsIgnoreCase("Help Requests")) {
                 setContentFragment("VIEW_HELP_FRAGMENT");
             } else if (sel.equalsIgnoreCase("View Notes")) {
                 setContentFragment("VIEW_NOTES_FRAGMENT");
@@ -1313,6 +1375,7 @@ public class ApplicationActivity extends FragmentActivity implements Application
                 dialog.show(getSupportFragmentManager(), "createNoteDialog");
             } else {
                 for (String s : directories) {
+                    sel = Config.removeGroupNameSpace(sel);
                     if (s.equalsIgnoreCase(sel)) {
                         setContentFragment(sel);
                         break;

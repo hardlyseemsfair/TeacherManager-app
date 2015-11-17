@@ -18,7 +18,7 @@ import util.MessageBank;
  */
 public interface ApplicationFragmentListener extends ApplicationActivityAccessorInterface {
 
-
+//o
     //USed by both top and bottom bars
     public void setContentFragment(String foldername);
 
